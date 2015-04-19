@@ -63,7 +63,7 @@ jQuery('*').mousemove(function(event) {
 
 jQuery('*').hover(
 		function(e) {
-			if (e.ctrlKey) {
+			if (e.altKey) {
 				if (L10N_gotone == false) {
 					var translation = jQuery(this).html();
 
