@@ -59,7 +59,7 @@ function L10N_Helper_Collector_Context($translated_text, $text, $context, $domai
         L10N_Helper_getsource($domain, $text)
     );
     
-    return ($translated_text);
+    return $translated_text;
 }
 
 function L10N_Helper_Collector($translated_text, $text, $domain)
@@ -72,7 +72,7 @@ function L10N_Helper_Collector($translated_text, $text, $domain)
         L10N_Helper_getsource($domain, $text)
     );
     
-    return ($translated_text);
+    return $translated_text;
 }
 
 add_action('wp_footer', 'L10N_Helper_Collection_output');
