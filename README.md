@@ -1,12 +1,14 @@
 Localization Helper
 =================================
 
-Shows the original string with details like domain, context and localization source file while hovering strings on a WordPress localized install. To display L10N details hover the targeted text while pressing the ALT key.
+Shows the original string with details like domain, context and localization source file while hovering strings on a WordPress localized install.
 
 Localization Helper for WordPress
 ---------------------------------------------------
 
 Shows the original string with details like domain, context and localization source file while hovering strings on a WordPress localized install. To display L10N details hover the targeted text while pressing the ALT key.
+
+Demo: See the Localization Helper in action : https://www.youtube.com/watch?v=NTHbJdh4sqg
 
 With Localization Helper you can easily debug localizations for plugins, themes and WordPress core.
 
