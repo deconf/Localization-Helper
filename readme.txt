@@ -17,7 +17,7 @@ With Localization Helper you can easily debug localizations for plugins, themes 
 > <strong>Localization Helper on GitHub</strong><br>
 > You can submit pull requests, feature requests or bugs on [Localization Helper](https://github.com/deconf/Localization-Helper) repository.
 
-Here's a short demo: https://www.youtube.com/watch?v=NTHbJdh4sqg
+Demo: See the Localization Helper in action https://www.youtube.com/watch?v=NTHbJdh4sqg
 
 == Installation ==
 
