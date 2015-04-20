@@ -7,10 +7,10 @@ Stable tag: 0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Shows the original text, domain, context and l10n source file while hovering strings / texts (when ALT key is pressed).
+Shows the original string with details like domain, context and localization source file while hovering strings on a WordPress localized install.
 
 == Description ==
-Shows the original text, domain, context and l10n source file while hovering strings / texts (when ALT key is pressed).
+Shows the original string with details like domain, context and localization source file while hovering strings on a WordPress localized install. To display L10N details hover the targeted text while pressing the ALT key.
 
 With Localization Helper you can easily debug localizations for plugins, themes and WordPress core.
 
