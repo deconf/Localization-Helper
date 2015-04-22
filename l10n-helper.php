@@ -54,7 +54,7 @@ function L10N_Helper_Collector_Context($translated_text, $text, $context, $domai
 {
     global $L10N_Helper_Collection;
     
-    $L10N_Helper_Collection[html_entity_decode($translated_text)] = array(
+    $L10N_Helper_Collection[str_replace('\u00a0', '&nbsp;', html_entity_decode($translated_text))] = array(
         $text,
         $domain,
         $context,
@@ -68,7 +68,7 @@ function L10N_Helper_Collector($translated_text, $text, $domain)
 {
     global $L10N_Helper_Collection;
     
-    $L10N_Helper_Collection[html_entity_decode($translated_text)] = array(
+    $L10N_Helper_Collection[str_replace('\u00a0', '&nbsp;', html_entity_decode($translated_text))] = array(
         $text,
         $domain,
         L10N_Helper_getsource($domain, $text)
@@ -81,7 +81,7 @@ function L10N_Helper_nCollector_Context($translated_text, $text, $plural, $numbe
 {
     global $L10N_Helper_Collection;
 
-    $L10N_Helper_Collection[html_entity_decode($translated_text)] = array(
+    $L10N_Helper_Collection[str_replace('\u00a0', '&nbsp;', html_entity_decode($translated_text))] = array(
         $text,
         $domain,
         $context,
@@ -95,7 +95,7 @@ function L10N_Helper_nCollector($translated_text, $text, $plural, $number,$domai
 {
     global $L10N_Helper_Collection;
 
-    $L10N_Helper_Collection[html_entity_decode($translated_text)] = array(
+    $L10N_Helper_Collection[str_replace('\u00a0', '&nbsp;', html_entity_decode($translated_text))] = array(
         $text,
         $domain,
         L10N_Helper_getsource($domain, $text)

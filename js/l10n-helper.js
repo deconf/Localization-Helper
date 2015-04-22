@@ -12,9 +12,9 @@ function escapeRegExp(str) {
 
 jQuery.each(L10N_data, function(key, value) {
 	if (key.match(/%([s,d,f]|[1-9]\$[s,d,f])/)) {
-		newmatch = key.replace(/%([s]|[1-9]\$[s])/g,'YYYYYY');
-		newmatch = newmatch.replace(/%([d]|[1-9]\$[d])/g,'ZZZZZZ');
-		newmatch = escapeRegExp(newmatch).replace(/YYYYYY YYYYYY/,'YYYYYY');
+		newmatch = key.replace(/%([s]|[1-9]\$[s])/g,'YYYYYY'); // strings
+		newmatch = newmatch.replace(/%([d]|[1-9]\$[d])/g,'ZZZZZZ'); // numbers
+		newmatch = escapeRegExp(newmatch).replace(/YYYYYY YYYYYY/,'YYYYYY'); //escape and avoid regex infinite loop
 		L10N_data_placeholder[key] = new RegExp('^'+newmatch.replace(/YYYYYY/g,'.*').replace(/ZZZZZZ/g,'[0-9999]')+'$');
 	}
 });
@@ -48,6 +48,7 @@ function render_results(translation) {
 							+ '<strong>L10N Source: </strong>'
 							+ L10N_data[translation][2]);
 		}
+		
 		if (!jQuery('#l10n-data').is(':visible')) {
 			jQuery('#l10n-data').dialog({
 				title : 'L10N Helper',
@@ -70,6 +71,9 @@ function render_results(translation) {
 				}
 			});
 		}
+		return true;
+	}else{
+		return false;
 	}
 }
 
@@ -84,29 +88,29 @@ jQuery('*').hover(
 				depth = depth + 1;
 				
 				if (depth < 2) {
+					
+					var gotone = false;
 
 					var translation = jQuery(this).html();
 					
 					if (translation.length < 1500){	
 						
-						render_results(translation);
-	
-						if (typeof L10N_data[translation] == 'undefined') {
-							render_results(translation.replace(/(<([^>]+)>)/ig, "")
+						gotone = render_results(translation);
+
+						if (!gotone) {
+							gotone = render_results(translation.replace(/(<([^>]+)>)/ig, "")
 									.replace(/(\r\n|\n|\r|\t)/g, "").trim());
 						}
 	
-						if (typeof L10N_data[translation] == 'undefined'
-								&& typeof jQuery(this).val() != 'undefined') {
-							render_results(jQuery(this).val());
+						if (!gotone	&& typeof jQuery(this).val() != 'undefined') {
+							gotone = render_results(jQuery(this).val());
 						}
 						
-						if (typeof L10N_data[translation] == 'undefined') {
+						if (!gotone) {
 							jQuery.each(L10N_data_placeholder, function(key, value) {
 								translation = translation.replace(/(\r\n|\n|\r|\t)/gm, "").trim();
-								console.log(translation+' => '+value);
 								if (translation && translation.match(value)) {
-									render_results(key);
+									gotone = render_results(key);
 								}
 							});
 						}
