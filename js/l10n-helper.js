@@ -17,7 +17,6 @@ jQuery.each(L10N_data, function(key, value) {
 		newmatch = escapeRegExp(newmatch).replace(/YYYYYY YYYYYY/,'YYYYYY'); //escape and avoid regex infinite loop
 		L10N_data_placeholder[key] = new RegExp('^'+newmatch.replace(/YYYYYY/g,'.*').replace(/ZZZZZZ/g,'[0-9999]')+'$');
 	}
-	console.log(key);
 });
 
 function htmlEncode(value) {
