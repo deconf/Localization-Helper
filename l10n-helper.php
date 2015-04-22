@@ -4,7 +4,7 @@
  * Plugin URI: https://deconf.com
  * Description: Shows the originals, domain, context and L10N source file while hovering translated strings (while ALT keypressed)
  * Author: Alin Marcu
- * Version: 0.1
+ * Version: 0.2
  * Author URI: https://deconf.com
  */
 
