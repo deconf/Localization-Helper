@@ -2,6 +2,21 @@
 
 var L10N_gotone = false;
 
+var L10N_data_placeholder = {};
+
+var newmatch;
+
+function escapeRegExp(str) {
+	  return str.replace(/[\@\:\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
+
+jQuery.each(L10N_data, function(key, value) {
+	if (key.match(/%([s,d,f]|[1-9]\$[s,d,f])/)) {
+		newmatch = escapeRegExp(key.replace(/%([s,d,f]|[1-9]\$[s,d,f])/g,'YYYYYY')).replace(/YYYYYY YYYYYY/g,'YYYYYY');
+		L10N_data_placeholder[key] = new RegExp('^'+newmatch.replace(/YYYYYY/g,'.*')+'$');
+	}
+});
+
 function htmlEncode(value) {
 	if (value) {
 		return jQuery('<div/>').text(value).html();
@@ -9,6 +24,7 @@ function htmlEncode(value) {
 		return '';
 	}
 }
+
 function render_results(translation) {
 	if (typeof L10N_data[translation] != 'undefined') {
 		if (L10N_data[translation].length > 3) {
@@ -64,22 +80,37 @@ jQuery('*').mousemove(function(event) {
 jQuery('*').hover(
 		function(e) {
 			if (e.altKey) {
+				
 				if (L10N_gotone == false) {
-					var translation = jQuery(this).html();
 
+					var translation = jQuery(this).html();
+					
+					if (typeof translation == 'undefined') {
+						return;
+					}
+					
 					render_results(translation);
 
 					if (typeof L10N_data[translation] == 'undefined') {
-						translation = translation.replace(/(<([^>]+)>)/ig, "")
-								.replace(/(\r\n|\n|\r|\t)/gm, "").trim();
-						render_results(translation);
+						render_results(translation.replace(/(<([^>]+)>)/ig, "")
+								.replace(/(\r\n|\n|\r|\t)/gm, "").trim());
 					}
 
 					if (typeof L10N_data[translation] == 'undefined'
 							&& typeof jQuery(this).val() != 'undefined') {
-						translation = jQuery(this).val();
-						render_results(translation);
+						render_results(jQuery(this).val());
 					}
+					
+					if (typeof L10N_data[translation] == 'undefined') {
+						jQuery.each(L10N_data_placeholder, function(key, value) {
+							translation = translation.replace(/(\r\n|\n|\r|\t)/gm, "").trim();
+							console.log(value)
+							if (translation && translation.match(value)) {
+								render_results(key);
+							}
+						});
+					}
+
 				}
 			}
 
