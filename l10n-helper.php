@@ -10,6 +10,8 @@
 
 add_filter('gettext', 'L10N_Helper_Collector', 10, 3);
 add_filter('gettext_with_context', 'L10N_Helper_Collector_Context', 10, 4);
+add_filter('ngettext', 'L10N_Helper_nCollector', 10, 5);
+add_filter('ngettext_with_context', 'L10N_Helper_nCollector_Context', 10, 6);
 
 add_filter('load_textdomain_mofile', 'L10N_Helper_MOFiles', 10, 2);
 
@@ -71,7 +73,34 @@ function L10N_Helper_Collector($translated_text, $text, $domain)
         $domain,
         L10N_Helper_getsource($domain, $text)
     );
-    
+
+    return $translated_text;
+}
+
+function L10N_Helper_nCollector_Context($translated_text, $text, $plural, $number, $context, $domain)
+{
+    global $L10N_Helper_Collection;
+
+    $L10N_Helper_Collection[html_entity_decode($translated_text)] = array(
+        $text,
+        $domain,
+        $context,
+        L10N_Helper_getsource($domain, $text)
+    );
+
+    return $translated_text;
+}
+
+function L10N_Helper_nCollector($translated_text, $text, $plural, $number,$domain)
+{
+    global $L10N_Helper_Collection;
+
+    $L10N_Helper_Collection[html_entity_decode($translated_text)] = array(
+        $text,
+        $domain,
+        L10N_Helper_getsource($domain, $text)
+    );
+
     return $translated_text;
 }
 
