@@ -98,8 +98,7 @@ jQuery('*').hover(
 						gotone = render_results(translation);
 
 						if (!gotone) {
-							gotone = render_results(translation.replace(/(<([^>]+)>)/ig, "")
-									.replace(/(\r\n|\n|\r|\t)/g, "").trim());
+							gotone = render_results(translation.replace(/(\r\n|\n|\r|\t)/g, "").replace(/&nbsp;/g, "\u00a0").trim());
 						}
 	
 						if (!gotone	&& typeof jQuery(this).val() != 'undefined') {
@@ -108,7 +107,7 @@ jQuery('*').hover(
 						
 						if (!gotone) {
 							jQuery.each(L10N_data_placeholder, function(key, value) {
-								translation = translation.replace(/(\r\n|\n|\r|\t)/gm, "").trim();
+								translation = translation.replace(/(\r\n|\n|\r|\t)/gm, "").replace(/&nbsp;/g, "\u00a0").trim();
 								if (translation && translation.match(value)) {
 									gotone = render_results(key);
 								}
